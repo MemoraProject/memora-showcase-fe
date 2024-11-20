@@ -1,0 +1,12 @@
+.animate-talking {
+    animation: talking 0.5s infinite;
+  }
+  
+  @keyframes talking {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
