@@ -3,7 +3,7 @@ import { AiResponse } from 'interfaces/ai.type';
 
 export const AiCommunicateApi = async (formData: FormData): Promise<AiResponse> => {
     // const response = await axios.post<AiResponse>(`${process.env.NEXT_PUBLIC_API}/audio/process`, formData, {
-    const response = await axios.post(`http://localhost:3000/api/ai`, formData, {
+    const response = await axios.post(`http://localhost:4000/audio/process`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data', 
         },
