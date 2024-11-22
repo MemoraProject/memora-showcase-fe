@@ -6,7 +6,7 @@ export type AiRequest = {
 
 export type AiResponse = {
     file_url: string,
-    ai_reponse: string,
+    ai_response: string,
     user_input: string
 }
 export type AudioSpeedType = "SLOW" | "NORMAL" | "FAST";
