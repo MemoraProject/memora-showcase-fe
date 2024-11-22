@@ -147,11 +147,11 @@ export default function AiCommunicate() {
                             alt="Japanese Boy"
                         />
                     </div>
-                    <div className={`w-full flex justify-center items-center ${isHaveHistory ? 'h-[20px] w-[200px]' : 'h-[80px] w-['}`}> 
+                    <div className={`w-full flex justify-center items-center ${isHaveHistory ? 'h-[40px] w-[240px]' : 'h-[80px] w-[320px]'}`}> 
                         {mediaRecorder ? (
                             <LiveAudioVisualizer
                                 mediaRecorder={mediaRecorder}
-                                width={isHaveHistory ? 200 : 320}
+                                width={isHaveHistory ? 240 : 320}
                                 height={isHaveHistory ? 20 : 80} 
                                 barWidth={4}
                                 gap={1}

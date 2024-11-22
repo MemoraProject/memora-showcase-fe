@@ -12,7 +12,7 @@ export default function CardMessage({ userMessage, aiMessage } : CardMessageInte
         <>
             <div className="w-full px-4 flex justify-end">
                 <div style={{ width: `calc(100% - 40px)` }} className="bg-gray-100 flex rounded-md min-h-[60px] items-center justify-end px-4">
-                    <div className="text-black p-2 text-left">
+                    <div className="text-black p-2 text-left font-sawarabi">
                         {renderParseNewlinesToBr(userMessage || '')}
                     </div>
                     <div>
@@ -25,7 +25,7 @@ export default function CardMessage({ userMessage, aiMessage } : CardMessageInte
 
             <div className="w-full px-4">
                 <div style={{ width: `calc(100% - 40px)` }}  className="flex flex-row-reverse rounded-md min-h-[60px] items-start gap-2">
-                    <div className="text-black text-left">
+                    <div className="text-black text-left font-sawarabi">
                         {
                             renderParseNewlinesToBr(aiMessage || '')
                         }
