@@ -1,5 +1,4 @@
 "use client";
-import React, { CSSProperties, useState } from "react";
 import { useAiCommunicate } from "hooks/ai.hook";
 import { AiRequest, AudioSpeedType } from "interfaces/ai.type";
 import {
@@ -9,6 +8,7 @@ import {
     UserRoundIcon,
     XIcon,
 } from "lucide-react";
+import { useState } from "react";
 import { LiveAudioVisualizer } from "react-audio-visualize";
 import { v4 as uuidv4 } from "uuid";
 import japanese_boy_2 from "../../../../public/japanese_boy_2.png";
@@ -185,8 +185,6 @@ export default function AiCommunicate() {
                     </div>
                 )}
             </div>
-
-
         </div>
     );
 }
