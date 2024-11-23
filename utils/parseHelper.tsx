@@ -2,7 +2,7 @@ import React from 'react';
 
 export function renderParseNewlinesToBr(input: string) {
     return (
-        <div>
+        <div className='pr-[20px]'>
             {input.split('\n').map((line, index) => (
                 <React.Fragment key={index}>
                     <p className='text-sm'>
