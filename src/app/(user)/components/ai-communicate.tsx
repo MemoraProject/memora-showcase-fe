@@ -44,6 +44,10 @@ export default function AiCommunicate() {
         setPayload((prev) => ({ ...prev, audio_speed: speedType }));
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 1);
+      }, []);
+
     const handleMicClick = async () => {
         if (isTalking) {
             mediaRecorder?.stop();
