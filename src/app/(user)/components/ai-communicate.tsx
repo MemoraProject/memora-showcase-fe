@@ -163,7 +163,7 @@ export default function AiCommunicate() {
       </div>
       {/* Body */}
       <div
-        className={`flex flex-grow flex-col items-center ${isHaveHistory ? "justify-start gap-4" : "justify-center gap-12"}`}
+        className={`border-2 border-blue-500 flex flex-grow flex-col items-center ${isHaveHistory ? "justify-start gap-4" : "justify-center gap-12"}`}
       >
         <>
           {isHaveHistory && (
@@ -172,44 +172,46 @@ export default function AiCommunicate() {
               className="animate-fade-in-slide h-[45vh] shadow-inner"
             />
           )}
-          <div
-            className={`${isHaveHistory ? "h-[80px] w-[80px]" : ""} aspect-square max-h-[400px] max-w-[400px]`}
-          >
-            <img
-              className={`h-full w-full`}
-              src={japanese_boy_2.src}
-              alt="Japanese Boy"
-            />
-          </div>
-          <div
-            className={`flex w-full items-center justify-center ${isHaveHistory ? "h-[40px] w-[240px]" : "h-[80px] w-[320px]"}`}
-          >
-            {mediaRecorder ? (
-              <LiveAudioVisualizer
-                mediaRecorder={mediaRecorder}
-                width={isHaveHistory ? 240 : 320}
-                height={isHaveHistory ? 20 : 80}
-                barWidth={4}
-                gap={1}
-                backgroundColor="transparent"
-                barColor="#FFF"
-                smoothingTimeConstant={0.4}
+          <div className="border-2 border-green-500">
+            <div
+              className={`${isHaveHistory ? "h-[80px] w-[80px]" : ""} aspect-square max-h-[400px] max-w-[400px]`}
+            >
+              <img
+                className={`h-full w-full`}
+                src={japanese_boy_2.src}
+                alt="Japanese Boy"
               />
-            ) : (
-              <div>
-                <Lottie
-                  animationData={loadingAnimation}
-                  loop={isLoading}
-                  className={`animate-fade-in-button h-[100px] w-[100px]`}
+            </div>
+            <div
+              className={`flex w-full items-center justify-center ${isHaveHistory ? "h-[40px] w-[240px]" : "h-[80px] w-[320px]"}`}
+            >
+              {mediaRecorder ? (
+                <LiveAudioVisualizer
+                  mediaRecorder={mediaRecorder}
+                  width={isHaveHistory ? 240 : 320}
+                  height={isHaveHistory ? 20 : 80}
+                  barWidth={4}
+                  gap={1}
+                  backgroundColor="transparent"
+                  barColor="#FFF"
+                  smoothingTimeConstant={0.4}
                 />
-              </div>
-            )}
+              ) : (
+                <div className="border-2 border-green-500">
+                  <Lottie
+                    animationData={loadingAnimation}
+                    loop={isLoading}
+                    className={`animate-fade-in-button ${isHaveHistory ? "h-[20px] w-[50px]" : "h-[100px] w-[100px]"}`}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </>
       </div>
       {/* Footer */}
       <div
-        className={`flex items-center justify-center px-6 ${isHaveHistory ? "-mt-2" : "min-h-[10px]"}`}
+        className={`border-2 border-red-500 flex items-center justify-center px-6 ${isHaveHistory ? "-mt-2" : "min-h-[10px]"}`}
       >
         {!isTalking && !isLoading ? (
           <button
