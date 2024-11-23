@@ -1,13 +1,24 @@
-import { UserRoundIcon } from "lucide-react";
+import { UserRoundIcon, Volume2Icon } from "lucide-react";
+import { useState } from "react";
 import { renderParseNewlinesToBr } from "utils/parseHelper";
 import japanese_boy_2 from "../../../../public/japanese_boy_2.png";
 
 export type CardMessageInterface = {
     userMessage?: string,
-    aiMessage?: string
+    aiMessage?: string,
+    fileUrl: string,
+    className?: string
 }
 
-export default function CardMessage({ userMessage, aiMessage } : CardMessageInterface){
+export default function CardMessage({ userMessage, aiMessage, fileUrl, className } : CardMessageInterface){
+    const [audio] = useState(new Audio(fileUrl));
+
+    const playAudio = () => {
+        audio.play().catch((error) => {
+            console.error("Error playing audio:", error);
+        });
+    };
+
     return (
         <>
             <div className="w-full px-4 flex justify-end">
@@ -24,8 +35,12 @@ export default function CardMessage({ userMessage, aiMessage } : CardMessageInte
             </div>
 
             <div className="w-full px-4">
-                <div style={{ width: `calc(100% - 40px)` }}  className="flex flex-row-reverse rounded-md min-h-[60px] items-start gap-2">
-                    <div className="text-black text-left font-sawarabi">
+                <div className="flex flex-row-reverse rounded-md min-h-[60px] items-start gap-2 w-full">
+                    <div className={`text-black text-left font-sawarabi w-full relative ${className} pr-6`}>
+                        {/* Audio Button  */}
+                        <button onClick={playAudio} className="absolute top-0 right-2 border-2 border-white rounded-full w-[28px] h-[28px] flex justify-center items-center shadow-lg">
+                            <Volume2Icon className="text-white w-[16px] h-[16px]"/>
+                        </button>
                         {
                             renderParseNewlinesToBr(aiMessage || '')
                         }

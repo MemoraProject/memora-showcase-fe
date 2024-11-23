@@ -110,10 +110,11 @@ export default function AiCommunicate() {
       setMessageHistory((prev) => [
         ...prev,
         {
-          userMessage: data?.user_input,
-          aiMessage: isTranslate
-            ? data?.ai_response
-            : filterJapaneseCharacters(data?.ai_response),
+            userMessage: data?.user_input,
+            aiMessage: isTranslate
+                ? data?.ai_response
+                : filterJapaneseCharacters(data?.ai_response),
+            fileUrl: data?.file_url
         },
       ]);
       setIsHaveHistory(true);
