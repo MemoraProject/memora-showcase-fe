@@ -128,45 +128,45 @@ export default function AiCommunicate() {
 
   return (
     <div
-      className={`flex h-screen w-full flex-col justify-between bg-gradient-to-b from-[#45AFE0] to-[#E7E7E7] pb-4`}
+      className={`flex h-screen w-full flex-col bg-gradient-to-b from-[#45AFE0] to-[#E7E7E7] pb-4`}
     >
-      <div>
-        {isSuccess && <AudioPlayer fileUrl={data.file_url} />}
-        {/* Navbar */}
-        <div className="flex h-[80px] items-center justify-center">
-          <div className="flex h-full w-1/3 items-center px-2">
-            <img
-              className="animate-fade-in-button h-[71px] w-[71px]"
-              src={logo.src}
-              alt="Logo"
-            />
-          </div>
-          <div className="flex h-full w-2/3 items-center justify-between px-6">
-            {isSetting ? (
-              <div className="animate-fade-in flex gap-6">
-                {renderSpeedOption("Chậm", "SLOW")}
-                {renderSpeedOption("Vừa", "NORMAL")}
-                {renderSpeedOption("Nhanh", "FAST")}
-              </div>
-            ) : (
-              <div className="flex gap-4" />
-            )}
-            <button
-              className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-gray-50 shadow-lg"
-              onClick={toggleSettings}
-            >
-              {isSetting ? (
-                <XIcon className="animate-fade-in-button text-[#525454]" />
-              ) : (
-                <Settings2Icon
-                  size={24}
-                  className="animate-fade-in-button text-[#525454]"
-                />
-              )}
-            </button>
-          </div>
+      {isSuccess && <AudioPlayer fileUrl={data.file_url} />}
+      {/* Navbar */}
+      <div className="flex h-[80px] items-center justify-center">
+        <div className="flex h-full w-1/3 items-center px-2">
+          <img
+            className="animate-fade-in-button h-[71px] w-[71px]"
+            src={logo.src}
+            alt="Logo"
+          />
         </div>
-        {/* Body */}
+        <div className="flex h-full w-2/3 items-center justify-between px-6">
+          {isSetting ? (
+            <div className="animate-fade-in flex gap-6">
+              {renderSpeedOption("Chậm", "SLOW")}
+              {renderSpeedOption("Vừa", "NORMAL")}
+              {renderSpeedOption("Nhanh", "FAST")}
+            </div>
+          ) : (
+            <div className="flex gap-4" />
+          )}
+          <button
+            className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-gray-50 shadow-lg"
+            onClick={toggleSettings}
+          >
+            {isSetting ? (
+              <XIcon className="animate-fade-in-button text-[#525454]" />
+            ) : (
+              <Settings2Icon
+                size={24}
+                className="animate-fade-in-button text-[#525454]"
+              />
+            )}
+          </button>
+        </div>
+      </div>
+      {/* Body */}
+      <div className="flex h-full flex-col justify-center">
         <div
           className={`flex max-h-[60vh] flex-col items-center`}
           // ${isHaveHistory ? "justify-start gap-4" : "justify-center gap-12"}
@@ -179,90 +179,90 @@ export default function AiCommunicate() {
             />
           )}
         </div>
-      </div>
 
-      <div className="">
-        <div className="flex flex-col items-center justify-center gap-4 border-green-500">
-          <div
-            className={`${isHaveHistory ? "h-[60px] w-[60px]" : ""} aspect-square max-h-[400px] max-w-[400px]`}
-          >
-            <img
-              className={`h-full w-full`}
-              src={japanese_boy_2.src}
-              alt="Japanese Boy"
-            />
-          </div>
-          <div
-            className={`flex h-fit w-fit items-center justify-center`}
-            // ${isHaveHistory ? "h-[40px] w-[240px]" : "h-[80px] w-[320px]"}
-            // `}
-          >
-            {mediaRecorder ? (
-              <LiveAudioVisualizer
-                mediaRecorder={mediaRecorder}
-                width={isHaveHistory ? 240 : 320}
-                height={isHaveHistory ? 20 : 80}
-                barWidth={4}
-                gap={1}
-                backgroundColor="transparent"
-                barColor="#FFF"
-                smoothingTimeConstant={0.4}
+        <div className="">
+          <div className="flex flex-col items-center justify-center gap-4 border-green-500">
+            <div
+              className={`${isHaveHistory ? "h-[60px] w-[60px]" : ""} aspect-square max-h-[400px] max-w-[400px]`}
+            >
+              <img
+                className={`h-full w-full`}
+                src={japanese_boy_2.src}
+                alt="Japanese Boy"
               />
-            ) : (
-              <div className="border-green-500">
-                <Lottie
-                  animationData={loadingAnimation}
-                  loop={isLoading}
-                  className={`animate-fade-in-button ${isHaveHistory ? "h-[50px] w-[50px]" : "h-[100px] w-[100px]"} `}
+            </div>
+            <div
+              className={`flex h-fit w-fit items-center justify-center`}
+              // ${isHaveHistory ? "h-[40px] w-[240px]" : "h-[80px] w-[320px]"}
+              // `}
+            >
+              {mediaRecorder ? (
+                <LiveAudioVisualizer
+                  mediaRecorder={mediaRecorder}
+                  width={isHaveHistory ? 240 : 320}
+                  height={isHaveHistory ? 20 : 80}
+                  barWidth={4}
+                  gap={1}
+                  backgroundColor="transparent"
+                  barColor="#FFF"
+                  smoothingTimeConstant={0.4}
                 />
+              ) : (
+                <div className="border-green-500">
+                  <Lottie
+                    animationData={loadingAnimation}
+                    loop={isLoading}
+                    className={`animate-fade-in-button ${isHaveHistory ? "h-[50px] w-[50px]" : "h-[100px] w-[100px]"} `}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+          {/* Footer */}
+          <div
+            className={`flex items-center justify-center border-red-500 px-6 ${isHaveHistory ? "" : "min-h-[10px]"}`}
+          >
+            {!isTalking && !isLoading ? (
+              <button
+                title="Start"
+                onClick={handleMicClick}
+                className={`animate-fade-in-button flex items-center justify-center rounded-full bg-[#E3F3FA] shadow-md ${isHaveHistory ? "h-[40px] w-[40px]" : "h-[88px] w-[88px]"}`}
+              >
+                <MicIcon
+                  className={`text-[#3d3d3d] ${isHaveHistory ? "h-[20px] w-[20px]" : "h-[60px] w-[60px]"}`}
+                />
+              </button>
+            ) : isLoading ? (
+              <div
+                className={`animate-fade-in-button flex items-center justify-center rounded-full bg-[#E3F3FA] shadow-md ${isHaveHistory ? "h-[36px] w-[36px]" : "h-[88px] w-[88px]"}`}
+              >
+                <div
+                  className={`${isHaveHistory ? "h-5 w-5 border-2 border-t-2" : "h-10 w-10 border-4 border-t-4"} animate-spin rounded-full border-solid border-[#3d3d3d]`}
+                ></div>
+              </div>
+            ) : (
+              <div className="relative flex w-full items-center justify-center">
+                <button
+                  title="Pause"
+                  onClick={stopRecording}
+                  className={`animate-fade-in-button flex items-center justify-center rounded-full bg-[#E3F3FA] shadow-md ${isHaveHistory ? "h-[36px] w-[36px]" : "h-[88px] w-[88px]"}`}
+                >
+                  <PauseIcon
+                    className={`text-[#3d3d3d] ${isHaveHistory ? "h-[15px] w-[15px]" : "h-[60px] w-[60px]"}`}
+                  />
+                </button>
+                <button
+                  title="Stop"
+                  onClick={stopRecording}
+                  className={`animate-fade-in-button absolute right-0 flex items-center justify-center rounded-full bg-[#FFD9D9] shadow-md ${isHaveHistory ? "h-[20px] w-[20px]" : "h-[44px] w-[44px]"}`}
+                >
+                  <XIcon
+                    className={`text-[#3d3d3d] ${isHaveHistory ? "h-[15px] w-[15px]" : "h-[60px] w-[60px]"}`}
+                  />
+                </button>
               </div>
             )}
           </div>
-        </div>
-        {/* Footer */}
-        <div
-          className={`flex items-center justify-center border-red-500 px-6 ${isHaveHistory ? "" : "min-h-[10px]"}`}
-        >
-          {!isTalking && !isLoading ? (
-            <button
-              title="Start"
-              onClick={handleMicClick}
-              className={`animate-fade-in-button flex items-center justify-center rounded-full bg-[#E3F3FA] shadow-md ${isHaveHistory ? "h-[40px] w-[40px]" : "h-[88px] w-[88px]"}`}
-            >
-              <MicIcon
-                className={`text-[#3d3d3d] ${isHaveHistory ? "h-[20px] w-[20px]" : "h-[60px] w-[60px]"}`}
-              />
-            </button>
-          ) : isLoading ? (
-            <div
-              className={`animate-fade-in-button flex items-center justify-center rounded-full bg-[#E3F3FA] shadow-md ${isHaveHistory ? "h-[36px] w-[36px]" : "h-[88px] w-[88px]"}`}
-            >
-              <div
-                className={`${isHaveHistory ? "h-5 w-5 border-2 border-t-2" : "h-10 w-10 border-4 border-t-4"} animate-spin rounded-full border-solid border-[#3d3d3d]`}
-              ></div>
-            </div>
-          ) : (
-            <div className="relative flex w-full items-center justify-center">
-              <button
-                title="Pause"
-                onClick={stopRecording}
-                className={`animate-fade-in-button flex items-center justify-center rounded-full bg-[#E3F3FA] shadow-md ${isHaveHistory ? "h-[36px] w-[36px]" : "h-[88px] w-[88px]"}`}
-              >
-                <PauseIcon
-                  className={`text-[#3d3d3d] ${isHaveHistory ? "h-[15px] w-[15px]" : "h-[60px] w-[60px]"}`}
-                />
-              </button>
-              <button
-                title="Stop"
-                onClick={stopRecording}
-                className={`animate-fade-in-button absolute right-0 flex items-center justify-center rounded-full bg-[#FFD9D9] shadow-md ${isHaveHistory ? "h-[20px] w-[20px]" : "h-[44px] w-[44px]"}`}
-              >
-                <XIcon
-                  className={`text-[#3d3d3d] ${isHaveHistory ? "h-[15px] w-[15px]" : "h-[60px] w-[60px]"}`}
-                />
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>

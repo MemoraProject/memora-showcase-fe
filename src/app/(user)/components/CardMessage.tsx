@@ -4,57 +4,72 @@ import { renderParseNewlinesToBr } from "utils/parseHelper";
 import japanese_boy_2 from "../../../../public/japanese_boy_2.png";
 
 export type CardMessageInterface = {
-    userMessage?: string,
-    aiMessage?: string,
-    fileUrl: string,
-    className?: string
-}
+  userMessage?: string;
+  aiMessage?: string;
+  fileUrl: string;
+  className?: string;
+};
 
-export default function CardMessage({ userMessage, aiMessage, fileUrl, className } : CardMessageInterface){
-    const [audio] = useState(new Audio(fileUrl));
+export default function CardMessage({
+  userMessage,
+  aiMessage,
+  fileUrl,
+  className,
+}: CardMessageInterface) {
+  const [audio] = useState(new Audio(fileUrl));
 
-    const playAudio = () => {
-        audio.play().catch((error) => {
-            console.error("Error playing audio:", error);
-        });
-    };
+  const playAudio = () => {
+    audio.play().catch((error) => {
+      console.error("Error playing audio:", error);
+    });
+  };
 
-    return (
-        <>
-            <div className="w-full px-4 flex justify-end">
-                <div style={{ width: `calc(100% - 40px)` }} className="bg-gray-100 flex rounded-md min-h-[60px] items-center justify-end px-4">
-                    <div className="text-black p-2 text-left font-sawarabi">
-                        {renderParseNewlinesToBr(userMessage || '')}
-                    </div>
-                    <div>
-                        <div className="bg-white rounded-full w-[32px] h-[32px] flex items-center justify-center">
-                            <UserRoundIcon color="#45afe0" size={20} />
-                        </div>
-                    </div>
-                </div>
+  return (
+    <>
+      <div className="flex w-full justify-end px-4">
+        <div
+          style={{ width: `calc(100% - 40px)` }}
+          className="flex min-h-[60px] items-center justify-end rounded-md bg-gray-100 px-4"
+        >
+          <div className="p-2 text-left font-sawarabi text-black">
+            {renderParseNewlinesToBr(userMessage || "")}
+          </div>
+          <div>
+            <div className="flex h-[32px] w-[32px] items-center justify-center rounded-full bg-white">
+              <UserRoundIcon color="#45afe0" size={20} />
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div className="w-full px-4">
-                <div className="flex flex-row-reverse rounded-md min-h-[60px] items-start gap-2 w-full">
-                    <div className={`text-black text-left font-sawarabi w-full relative ${className} pr-6`}>
-                        {/* Audio Button  */}
-                        <button onClick={playAudio} className="absolute top-0 right-2 border-2 border-white rounded-full w-[28px] h-[28px] flex justify-center items-center shadow-lg">
-                            <Volume2Icon className="text-white w-[16px] h-[16px]"/>
-                        </button>
-                        {
-                            renderParseNewlinesToBr(aiMessage || '')
-                        }
-                    </div>
-                    <div className="flex items-start justify-start h-full">
-                        <div className="rounded-full w-[32px] h-[32px]">
-                            <img 
-                                className="w-full h-full"
-                                src={japanese_boy_2.src}
-                            />
-                        </div>
-                    </div>
-                </div>
+      <div className="w-full px-4">
+        <div className="flex min-h-[60px] w-full flex-row items-start gap-2 rounded-md">
+          <div className="flex h-full items-start justify-start">
+            <div className="h-[32px] w-[32px] rounded-full">
+              <img
+                title="Japanese Boy"
+                className="h-full w-full"
+                src={japanese_boy_2.src}
+              />
             </div>
-        </>
-    )
+          </div>
+          <div
+            className={`w-full text-left font-sawarabi text-black ${className}`}
+          >
+            {/* Audio Button  */}
+            {renderParseNewlinesToBr(aiMessage || "")}
+          </div>
+          <div className="flex items-center justify-center">
+            <button
+              title="Play Audio"
+              onClick={playAudio}
+              className="flex h-[28px] w-[28px] items-center justify-center rounded-full border-2 border-white shadow-lg"
+            >
+              <Volume2Icon className="h-[16px] w-[16px] text-white" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
