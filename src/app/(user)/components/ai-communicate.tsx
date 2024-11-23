@@ -35,6 +35,7 @@ export default function AiCommunicate() {
     });
     const [messageHistory, setMessageHistory] = useState<CardMessageInterface[]>([]);
     const [isHaveHistory, setIsHaveHistory] = useState(false);
+    const [isTranslate, setIsTranslate] = useState(true);
 
     const toggleSettings = () => setIsSetting((prev) => !prev);
 
@@ -89,11 +90,18 @@ export default function AiCommunicate() {
         </label>
     );
 
+    function filterJapaneseCharacters(input: string) {
+        const regex = /[^\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}\p{P}\s]/gu;        
+        return input.replace(regex, '');
+      }
+      
+
+
     useEffect(() => {
         if(data?.user_input != undefined || data?.ai_response != undefined){
             setMessageHistory(prev => [...prev, {
                 userMessage: data?.user_input,
-                aiMessage: data?.ai_response
+                aiMessage: isTranslate ? data?.ai_response : filterJapaneseCharacters(data?.ai_response)
             }]);  
             setIsHaveHistory(true)
         }
