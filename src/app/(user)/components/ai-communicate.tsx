@@ -25,16 +25,13 @@ export default function AiCommunicate() {
   const [isTalking, setIsTalking] = useState(false);
   const [isSetting, setIsSetting] = useState(false);
   const [option, setOption] = useState<AudioSpeedType>("NORMAL");
-  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
-    null,
-  );
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+  const [mediaStream, setMediaStream] = useState<MediaStream | null>(null); // New state for media stream
   const [payload, setPayload] = useState<AiRequest>({
     uid: uuidv4(),
     audio_speed: "NORMAL",
   });
-  const [messageHistory, setMessageHistory] = useState<CardMessageInterface[]>(
-    [],
-  );
+  const [messageHistory, setMessageHistory] = useState<CardMessageInterface[]>([]);
   const [isHaveHistory, setIsHaveHistory] = useState(false);
   const [isTranslate, setIsTranslate] = useState(true);
 
@@ -51,8 +48,7 @@ export default function AiCommunicate() {
 
   const handleMicClick = async () => {
     if (isTalking) {
-      mediaRecorder?.stop();
-      setIsTalking(false);
+      stopRecording();
       return;
     }
 
@@ -66,20 +62,24 @@ export default function AiCommunicate() {
       const audioFile = new File([audioBlob], "audio.wav", {
         type: "audio/wav",
       });
-      stopRecording()
       setPayload((prev) => ({ ...prev, file: audioFile }));
       mutate({ ...payload, file: audioFile });
     };
 
     recorder.start();
     setMediaRecorder(recorder);
+    setMediaStream(stream); // Store the media stream
     setIsTalking(true);
   };
 
   const stopRecording = () => {
-    mediaRecorder?.stop();
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+      mediaRecorder.stream.getTracks().forEach(track => track.stop()); 
+      setMediaRecorder(null);
+      setMediaStream(null); // Clear the media stream
+    }
     setIsTalking(false);
-    setMediaRecorder(null);
   };
 
   const renderSpeedOption = (label: string, value: AudioSpeedType) => (
@@ -111,11 +111,11 @@ export default function AiCommunicate() {
       setMessageHistory((prev) => [
         ...prev,
         {
-            userMessage: data?.user_input,
-            aiMessage: isTranslate
-                ? data?.ai_response
-                : filterJapaneseCharacters(data?.ai_response),
-            fileUrl: data?.file_url
+          userMessage: data?.user_input,
+          aiMessage: isTranslate
+            ? data?.ai_response
+            : filterJapaneseCharacters(data?.ai_response),
+          fileUrl: data?.file_url,
         },
       ]);
       setIsHaveHistory(true);
@@ -162,18 +162,15 @@ export default function AiCommunicate() {
         </div>
       </div>
       {/* Body */}
-      {/* <button onClick={handleHeight}>Click To Handle Height</button> */}
       <div
         className={`flex flex-grow flex-col items-center ${isHaveHistory ? "justify-start gap-4" : "justify-center gap-12"}`}
       >
         <>
           {isHaveHistory && (
-            <>
-              <MessageHistory
-                cardMessages={messageHistory}
-                className="animate-fade-in-slide h-[50vh] shadow-inner"
-              />
-            </>
+            <MessageHistory
+              cardMessages={messageHistory}
+              className="animate-fade-in-slide h-[45vh] shadow-inner"
+            />
           )}
           <div
             className={`${isHaveHistory ? "h-[80px] w-[80px]" : ""} aspect-square max-h-[400px] max-w-[400px]`}
@@ -199,12 +196,6 @@ export default function AiCommunicate() {
                 smoothingTimeConstant={0.4}
               />
             ) : (
-              //   <img
-              //     className="animate-fade-in-button h-full w-1/2"
-              //     src={static_voice.src}
-              //     alt="Static Voice"
-              //   />
-
               <div>
                 <Lottie
                   animationData={loadingAnimation}
@@ -218,7 +209,7 @@ export default function AiCommunicate() {
       </div>
       {/* Footer */}
       <div
-        className={`flex items-center justify-center px-6 ${isHaveHistory ? "-mt-2 min-h-[100px]" : "min-h-[10px]"}`}
+        className={`flex items-center justify-center px-6 ${isHaveHistory ? "-mt-2" : "min-h-[10px]"}`}
       >
         {!isTalking && !isLoading ? (
           <button
