@@ -66,6 +66,7 @@ export default function AiCommunicate() {
       const audioFile = new File([audioBlob], "audio.wav", {
         type: "audio/wav",
       });
+      stopRecording()
       setPayload((prev) => ({ ...prev, file: audioFile }));
       mutate({ ...payload, file: audioFile });
     };
